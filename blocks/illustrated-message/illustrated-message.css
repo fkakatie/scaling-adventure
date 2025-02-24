@@ -1,0 +1,60 @@
+.illustrated-message {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.illustrated-message > div {
+  max-width: 380px;
+  padding: var(--spacing-xxl) var(--spacing-m);
+}
+
+.illustrated-message .button-wrapper {
+  margin-top: var(--spacing-m);
+  justify-content: center;
+}
+
+.illustrated-message .illustration-wrapper {
+  text-align: center;  
+}
+
+.illustrated-message .illustration-wrapper span.icon svg,
+.illustrated-message .illustration-wrapper span.icon img {
+  width: 160px;
+  height: 160px;
+}
+
+/* vertical variant */
+@media (width >= 600px) {
+  .illustrated-message.vertical > div {
+    max-width: unset;
+  }
+
+  .illustrated-message.vertical .illustration-wrapper picture > img {
+    max-width: 380px;
+  }
+}
+
+@media (width >= 900px) {
+  .illustrated-message.vertical {
+    text-align: left;
+  }
+
+  .illustrated-message.vertical > div {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-m);
+  }
+
+  .illustrated-message.vertical .button-wrapper {
+    justify-content: flex-start;
+  }
+
+  .illustrated-message.vertical .illustration-wrapper.illustrated-icon {
+    flex: 0 0 160px;
+  }
+
+  .illustrated-message.vertical .illustration-wrapper.illustrated-img {
+    flex: 0 0 380px;
+  }
+}

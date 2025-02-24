@@ -1,0 +1,61 @@
+.accordion details {
+  border-top: var(--border-s) solid var(--gray-200);
+}
+
+.accordion details:last-of-type {
+  border-bottom: var(--border-s) solid var(--gray-200);
+}
+
+.accordion details summary {
+  position: relative;
+  border: var(--border-m) solid transparent;
+  padding: var(--spacing-xxs) var(--spacing-xs);
+  padding-left: calc(var(--icon-s) + (2 * var(--spacing-xs)));
+  cursor: pointer;
+  font-weight: var(--weight-bold);
+  line-height: var(--line-height-m);
+  list-style: none;
+  transition: background-color 0.3s, border-radius 0.3s;
+}
+
+.accordion details summary:hover {
+  background-color: var(--gray-100);
+}
+
+.accordion details summary:focus {
+  border: var(--border-m) solid var(--color-link);
+  border-radius: var(--rounding-m);
+  background-color: var(--gray-100);
+}
+
+.accordion details summary span.icon-chevron {
+  position: absolute;
+  top: 50%;
+  left: var(--spacing-xs);
+  transform: translateY(-50%);
+}
+
+.accordion details summary span.icon-chevron img,
+.accordion details summary span.icon-chevron svg {
+  width: var(--icon-s);
+  height: var(--icon-s);
+  transition: transform 0.3s;
+}
+
+.accordion details[open] summary span.icon-chevron img,
+.accordion details[open] summary span.icon-chevron svg {
+  transform: rotate(0);
+}
+
+.accordion details summary + div {
+  margin: 0 var(--spacing-xs);
+}
+
+/* quiet */
+.accordion.quiet details {
+  border: none;
+}
+
+.accordion.quiet details summary {
+  border-radius: var(--rounding-m);
+}

@@ -1,0 +1,128 @@
+.alert {
+  position: relative;
+  border: var(--border-m) solid var(--blue-800);
+  border-radius: var(--rounding-m);
+  padding: var(--spacing-l);
+  font-size: var(--body-size-s);
+}
+
+.alert .icon-wrapper {
+  position: absolute;
+  top: var(--spacing-l);
+  right: var(--spacing-l);
+  color: var(--blue-800);
+}
+
+.alert .icon-wrapper svg,
+.alert .icon-wrapper img {
+  width: var(--icon-l);
+  height: var(--icon-l);
+}
+
+.alert .icon-wrapper + *,
+.alert .alert-title.alert-with-icon {
+  margin-right: calc(var(--icon-l) + var(--spacing-xs));
+}
+
+.alert .alert-title {
+  margin-top: 0;
+}
+
+.alert > div > div > :last-child {
+  margin-bottom: 0;
+}
+
+/* positive variants */
+.alert.positive {
+  border-color: var(--green-1000);
+}
+
+.alert.positive.subtle {
+  background-color: var(--green-200);
+}
+
+.alert.positive.bold {
+  border-color: var(--green-1000);
+  background-color: var(--green-1000);
+}
+
+.alert.positive .icon-wrapper {
+  color: var(--green-1000);
+}
+
+/* negative variants */
+.alert.negative {
+  border-color: var(--red-800);
+}
+
+.alert.negative.subtle {
+  background-color: var(--red-200);
+}
+
+.alert.negative.bold {
+  border-color: var(--red-900);
+  background-color: var(--red-900);
+}
+
+.alert.negative .icon-wrapper {
+  color: var(--red-800);
+}
+
+/* neutral variants */
+.alert.neutral {
+  border-color: var(--gray-500);
+}
+
+.alert.neutral.subtle {
+  background-color: var(--gray-100);
+}
+
+.alert.neutral.bold {
+  border-color: var(--gray-700);
+  background-color: var(--gray-700);
+}
+
+.alert.neutral .icon-wrapper {
+  color: var(--gray-500);
+}
+
+/* notice variants */
+.alert.notice {
+  border-color: var(--orange-800);
+}
+
+.alert.notice .icon-wrapper {
+  color: var(--orange-800);
+}
+
+.alert.notice.subtle {
+  background-color: var(--orange-200);
+}
+
+.alert.notice.bold {
+  border-color: var(--orange-600);
+  background-color: var(--orange-600);
+  color: black;
+}
+
+.alert.notice.bold .icon-wrapper {
+  color: black;
+}
+
+/* subtle variant */
+.alert.subtle {
+  border-color: transparent;
+  background-color: var(--blue-200);
+}
+
+/* bold variant */
+.alert.bold {
+  border-color: var(--blue-900);
+  background-color: var(--blue-900);
+  color: white;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.alert.bold .icon-wrapper {
+  color: white;
+}

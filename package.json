@@ -1,0 +1,28 @@
+{
+  "name": "@fkakatie/specter",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Starter project for Adobe AEM with Specter",
+  "scripts": {
+    "lint:js": "eslint .",
+    "lint:css": "stylelint blocks/**/*.css styles/*.css",
+    "lint": "npm run lint:js && npm run lint:css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fkakatie/specter.git"
+  },
+  "author": "@fkakatie",
+  "bugs": {
+    "url": "https://github.com/fkakatie/specter/issues"
+  },
+  "homepage": "https://main--specter--fkakatie.aem.live/",
+  "devDependencies": {
+    "@babel/eslint-parser": "7.24.8",
+    "eslint": "8.57.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-plugin-import": "2.29.1",
+    "stylelint": "16.7.0",
+    "stylelint-config-standard": "36.0.1"
+  }
+}
