@@ -1,26 +1,46 @@
-# Your Project's Title...
-Your project's description...
+# Edge Delivery Services in Adobe Experience Manager Sites as a Cloud Service with Document-Based Authoring Commerce Test
+
+## Prerequisites
+
+- Github CLI https://cli.github.com/
 
 ## Environments
-- Preview: https://main--specter--fkakatie.hlx.page/
-- Live: https://main--specter--fkakatie.hlx.live/
+- Preview: [https://main--scaling-adventure--fkakatie.aem.page/](https://main--scaling-adventure--fkakatie.aem.page/)
+- Live: [https://main--scaling-adventure--fkakatie.aem.live/](https://main--scaling-adventure--fkakatie.aem.live/)
 
-## Installation
+## Local Setup
 
-```sh
-npm i
-```
+To set up the `scaling-adventure` project locally, follow these steps:
 
-## Linting
+1. Clone the repository:
 
-```sh
-npm run lint
-```
+    ```bash copy
+    gh repo clone fkakatie/scaling-adventure
+    ```
+
+1. Increase scope of Github CLI
+
+    ```bash copy
+    gh auth refresh --scopes read:packages
+    ```
+
+1. Install Dependencies:
+
+    ```bash copy
+    ./setup/install
+    ```
 
 ## Local development
 
-1. Create a new repository based on the `aem-boilerplate` template and add a mountpoint in the `fstab.yaml`
-1. Add the [AEM Code Sync GitHub App](https://github.com/apps/aem-code-sync) to the repository
-1. Install the [AEM CLI](https://github.com/adobe/helix-cli): `npm install -g @adobe/aem-cli`
-1. Start AEM Proxy: `aem up` (opens your browser at `http://localhost:3000`)
-1. Open the `specter` directory in your favorite IDE and start coding :)
+- Start AEM Proxy: `aem up` (opens your browser at `http://localhost:3000`)
+
+## Linting
+
+```bash copy
+npm run lint
+```
+
+## Run automation scripts on the local machine
+
+1. Start AEM Proxy: `aem up`
+1. Run automation command in another terminal: `npx cypress run --env tags=@all`

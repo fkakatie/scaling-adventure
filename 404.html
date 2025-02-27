@@ -3,6 +3,14 @@
 
 <head>
   <title>Page not found</title>
+  <!-- <script type="importmap">
+    {
+        "imports": {
+            "@dropins/tools/": "/scripts/__dropins__/tools/",
+            "@dropins/storefront-pdp/": "/scripts/__dropins__/storefront-pdp/"
+        }
+    }
+  </script> -->
   <script type="text/javascript">
     window.isErrorPage = true;
     window.errorCode = '404';
@@ -11,6 +19,8 @@
   <meta property="og:title" content="Page not found">
   <script src="/scripts/scripts.js" type="module" crossorigin="use-credentials"></script>
   <script type="module">
+    import { sampleRUM } from '/scripts/aem.js';
+
     window.addEventListener('load', () => {
       if (document.referrer) {
         const { origin, pathname } = new URL(document.referrer);
@@ -24,26 +34,15 @@
           btnContainer.append(backBtn);
         }
       }
+      sampleRUM('404', { source: document.referrer });
     });
-  </script>
-  <script type="module">
-    import { sampleRUM } from '/scripts/aem.js';
-    sampleRUM('404', { source: document.referrer });
   </script>
   <link rel="stylesheet" href="/styles/styles.css">
   <style>
     main.error {
-      min-height: calc(100vh - var(--header-height));
+      min-height: calc(100vh - var(--nav-height));
       display: flex;
       align-items: center;
-    }
-
-    main.error .error-number {
-      width: 100%;
-    }
-
-    main.error .error-number text {
-      font-family: var(--code-font-family);
     }
   </style>
   <link rel="stylesheet" href="/styles/lazy-styles.css">
@@ -53,13 +52,16 @@
   <header></header>
   <main class="error">
     <div class="section">
-      <svg viewBox="1 0 38 18" class="error-number">
-        <text x="0" y="17">404</text>
-      </svg>
-      <h2 class="error-message">Page Not Found</h2>
-      <p class="button-container">
-        <a href="/" class="button secondary error-button-home">Go home</a>
-      </p>
+      <h1 class="page-title">
+        <span class="base" data-ui-id="page-title-wrapper" >The page you are looking for cannot be found.</span>
+      </h1>
+      <h2>The page you requested was not found, and we have a fine guess why.</h2>
+      <dd>
+      <ul class="disc">
+        <li>If you typed the URL directly, please make sure the spelling is correct.</li>
+        <li>If you clicked on a link to get here, we must have moved the content. Apologies for the inconvenience!</li>
+        <li>If you are not sure how you got here, return to our <br /><a href="/">store homepage</a> or use the search bar at the top of the page to search for products.</li>
+      </ul>
     </div>
   </main>
   <footer></footer>

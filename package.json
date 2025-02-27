@@ -1,8 +1,8 @@
 {
-  "name": "@fkakatie/specter",
+  "name": "@fkakatie/scaling-adventure",
   "private": true,
   "version": "0.0.0",
-  "description": "Starter project for Adobe AEM with Specter",
+  "description": "Test project for Adobe AEM",
   "scripts": {
     "lint:js": "eslint .",
     "lint:css": "stylelint blocks/**/*.css styles/*.css",
@@ -10,19 +10,26 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fkakatie/specter.git"
+    "url": "git+https://github.com/fkakatie/scaling-adventure.git"
   },
   "author": "@fkakatie",
   "bugs": {
-    "url": "https://github.com/fkakatie/specter/issues"
+    "url": "https://github.com/fkakatie/scaling-adventure/issues"
   },
-  "homepage": "https://main--specter--fkakatie.aem.live/",
+  "homepage": "https://main--scaling-adventure--fkakatie.aem.live/",
   "devDependencies": {
-    "@babel/eslint-parser": "7.24.8",
     "eslint": "8.57.0",
     "eslint-config-airbnb-base": "15.0.0",
+    "@babel/eslint-parser": "7.24.8",
+    "cypress": "^13.17.0",
+    "@badeball/cypress-cucumber-preprocessor": "^22.0.1",
+    "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "2.29.1",
     "stylelint": "16.7.0",
     "stylelint-config-standard": "36.0.1"
+  },
+  "dependencies": {
+    "@adobe/magento-storefront-event-collector": "^1.8.0",
+    "@adobe/magento-storefront-events-sdk": "^1.8.0"
   }
 }

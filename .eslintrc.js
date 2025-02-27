@@ -11,8 +11,30 @@ module.exports = {
     requireConfigFile: false,
   },
   rules: {
-    'import/extensions': ['error', { js: 'always' }], // require js file extensions in imports
-    'linebreak-style': ['error', 'unix'], // enforce unix linebreaks
-    'no-param-reassign': [2, { props: false }], // allow modifying properties of param
+    // allow reassigning param
+    'no-param-reassign': [2, { props: false }],
+    'linebreak-style': ['error', 'unix'],
+    'import/extensions': ['error', {
+      js: 'always',
+    }],
+    'no-underscore-dangle': 'off',
+    // Add exception for Cypress and test files
+    'import/no-extraneous-dependencies': ['error', {
+      devDependencies: [
+        '**/*.test.js',
+        '**/*.spec.js',
+        '**/cypress.config.js',
+        '**/cypress/**/*.js',
+      ],
+    }],
+  },
+  settings: {
+    'import/resolver': {
+      alias: {
+        map: [
+          ['@badeball/cypress-cucumber-preprocessor/browserify', './node_modules/@badeball/cypress-cucumber-preprocessor/dist/subpath-entrypoints/browserify.d.ts'],
+        ],
+      },
+    },
   },
 };

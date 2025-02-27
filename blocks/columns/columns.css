@@ -1,0 +1,113 @@
+.columns-container {
+	display: grid;
+	place-content: center;
+}
+
+@media screen and (width >= 1200px){
+  .columns-wrapper {
+    max-width: 1400px;
+  }
+}
+
+.columns > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.columns img {
+  width: 100%;
+}
+
+.columns > div > .columns-img-col {
+  width: 60%;
+}
+
+.columns > div > div:not(.columns-img-col) {
+  color: var(--color-outer-space);
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media screen and (width >= 900px) {
+.columns.twenty-eighty > div > div:first-child {
+  width: 20%;
+}
+
+.columns.twenty-eighty > div > div:nth-child(2) {
+  width: 80%;
+}
+
+.columns.eighty-twenty > div > div:first-child {
+  width: 80%;
+}
+
+.columns.eighty-twenty > div > div:nth-child(2) {
+  width: 20%;
+}
+
+.columns.our-collection > div > div:not(.columns-img-col) {
+  width: 50%;
+  }
+}
+
+.columns > div > div:not(.columns-img-col) p {
+  font-size: var(--body-font-size-xxs);
+  letter-spacing: 0.25px;
+  margin-top: 0;
+}
+
+.columns > div > div:not(.columns-img-col) a {
+  color: inherit;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  margin-top: 0;
+}
+
+.columns > div > div:not(.columns-img-col) h1,
+.columns > div > div:not(.columns-img-col) h2,
+.columns > div > div:not(.columns-img-col) h3,
+.columns > div > div:not(.columns-img-col) h4,
+.columns > div > div:not(.columns-img-col) h5,
+.columns > div > div:not(.columns-img-col) h6 {
+  text-align: left;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.columns > div > .columns-img-col img {
+  display: block;
+}
+
+.columns.our-collection > div > div:not(.columns-img-col) a {
+  color: #454545;
+  font-weight: 400;
+}
+
+@media screen and (width >= 900px) {
+  .columns > div {
+    align-items: center;
+    flex-direction: unset;
+    gap: 40px;
+  }
+
+  .columns.our-collection > div {
+    align-items: baseline;
+  }
+}
+
+@media screen and (width <= 899px) {
+  .columns > div > .columns-img-col {
+    width: 100%;
+  }
+
+  .columns > div > div {
+    margin: 0.5rem 0;
+  }
+
+  .columns > div > div:not(.columns-img-col),
+  .columns.our-collection > div > div:not(.columns-img-col) {
+    width: 100%;
+  }
+}

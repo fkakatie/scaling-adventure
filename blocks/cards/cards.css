@@ -1,43 +1,108 @@
+.cards-container {
+	display: grid;
+	place-content: center;
+}
+
+@media screen and (width >= 1200px){
+  .cards-wrapper {
+    max-width: 1400px;
+  }
+}
+
 .cards > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  gap: var(--horizontal-spacing);
+  grid-gap: 24px 16px;
 }
 
-.cards > ul > li {
-  border-radius: var(--rounding-l);
-  box-shadow: var(--shadow-default);
-  cursor: pointer;
-  transition: box-shadow 0.3s;
-}
-
-.cards > ul > li:hover {
-  box-shadow: var(--shadow-hover);
-}
-
-.cards .cards-card-image,
-.cards .cards-card-image img {
-  border-radius: var(--rounding-l) var(--rounding-l) 0 0;
+.cards .cards-card-image {
   line-height: 0;
 }
 
-.cards .cards-card-image img {
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+.cards > ul > li img {
+  width: 100%;
+
+  /* aspect-ratio: 1; */
+  object-fit: contain;
 }
 
 .cards .cards-card-body {
-  margin: var(--horizontal-spacing);
+  color: var(--color-outer-space);
 }
 
-.cards .cards-card-body > :first-child {
-  margin-top: 0;
+.cards .cards-card-body a {
+  color: inherit;
+  font-size: var(--body-font-size-xxs);
+  line-height: 24px;
+  letter-spacing: 0.6px;
+  overflow-wrap: break-word;
+  text-size-adjust: 100%;
 }
 
-@media (width >= 600px) {
-  .cards > ul {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+.cards .cards-card-body a.single {
+  font-size: var(--body-font-size-s);
+  font-weight: 600;
+}
+
+.cards .cards-card-body h5 {
+  text-align: unset;
+  margin-top: 1rem;
+}
+
+.cards .cards-card-body p.button-container a {
+  margin: 0;
+}
+
+.cards .cards-card-body p {
+  font-size: var(--body-font-size-xxs);
+  letter-spacing: 0.25px;
+}
+
+/* grid-4 */
+.cards.grid-4 > ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+/* grid-3 */
+.cards.grid-3 > ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 24px 30px;
+}
+
+.cards.grid-3 > ul > li img {
+  max-height: 330px;
+}
+
+/* grid-2 */
+.cards.grid-2 > ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 24px 30px;
+}
+
+/* text-center */
+.cards.text-center .cards-card-body {
+  text-align: center;
+}
+
+/* text-left-align */
+.cards.text-left-align .cards-card-body {
+  text-align: start;
+}
+
+/* text-right-align */
+.cards.text-right-align .cards-card-body {
+  text-align: end;
+}
+
+@media screen and (width <= 768px) {
+  .cards.grid-4 > ul,
+  .cards.grid-3 > ul,
+  .cards.grid-2 > ul {
+   grid-template-columns: unset;
   }
 }

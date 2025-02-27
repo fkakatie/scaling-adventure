@@ -249,6 +249,22 @@ function getMetadata(name, doc = document) {
 }
 
 /**
+ * Gets all the metadata elements that are in the given scope.
+ * @param {String} scope The scope/prefix for the metadata
+ * @returns an array of HTMLElement nodes that match the given scope
+ */
+function getAllMetadata(scope) {
+  return [...document.head.querySelectorAll(`meta[property^="${scope}:"],meta[name^="${scope}-"]`)]
+    .reduce((res, meta) => {
+      const id = toClassName(meta.name
+        ? meta.name.substring(scope.length + 1)
+        : meta.getAttribute('property').split(':')[1]);
+      res[id] = meta.getAttribute('content');
+      return res;
+    }, {});
+}
+
+/**
  * Returns a picture element with webp and fallbacks
  * @param {string} src The image URL
  * @param {string} [alt] The image alternative text
@@ -260,7 +276,7 @@ function createOptimizedPicture(
   src,
   alt = '',
   eager = false,
-  breakpoints = [{ media: '(min-width: 600px)', width: '2000' }, { width: '750' }],
+  breakpoints = [{ media: '(width >= 600px)', width: '2000' }, { width: '750' }],
 ) {
   const url = new URL(src, window.location.href);
   const picture = document.createElement('picture');
@@ -462,6 +478,39 @@ async function fetchPlaceholders(prefix = 'default') {
 }
 
 /**
+ * Gets showroom locations object.
+ * @param {string} [prefix] Location of Showroom locations
+ * @returns {object} Window locations object
+ */
+// eslint-disable-next-line import/prefer-default-export
+async function fetchShowroomLocationsData(sheetName = 'default') {
+  window.locations = window.locations || {};
+  if (!window.locations[sheetName]) {
+    window.locations[sheetName] = new Promise((resolve) => {
+      fetch('/us/showrooms/showroom-locations.json')
+        .then((resp) => {
+          if (resp.ok) {
+            return resp.json();
+          }
+          return {};
+        })
+        .then((json) => {
+          const locations = json.data || [];
+          // Store all location data instead of filtering by columnKey and columnValue
+          window.locations = locations || []; // Assuming locations.data holds the array of rows
+          resolve(window.locations);
+        })
+        .catch(() => {
+          // Error loading locations
+          window.locations = [];
+          resolve(window.locations);
+        });
+    });
+  }
+  return window.locations[sheetName];
+}
+
+/**
  * Builds a block DOM Element from a two dimensional array, string, or object
  * @param {string} blockName name of the block
  * @param {*} content two dimensional array or string or object of content
@@ -539,7 +588,7 @@ function decorateBlock(block) {
     block.classList.add('block');
     block.dataset.blockName = shortBlockName;
     block.dataset.blockStatus = 'initialized';
-    wrapTextNodes(block);
+    // wrapTextNodes(block);
     const blockWrapper = block.parentElement;
     blockWrapper.classList.add(`${shortBlockName}-wrapper`);
     const section = block.closest('.section');
@@ -577,6 +626,18 @@ async function loadFooter(footer) {
   footer.append(footerBlock);
   decorateBlock(footerBlock);
   return loadBlock(footerBlock);
+}
+
+/**
+ * Loads a block named 'geopopup' into geopopupBlock
+ * @param geopopup element
+ * @returns {Promise}
+ */
+async function loadGeopopup(geopopup) {
+  const geopopupBlock = buildBlock('geopopup', '');
+  geopopup.append(geopopupBlock);
+  decorateBlock(geopopupBlock);
+  return loadBlock(geopopupBlock);
 }
 
 /**
@@ -641,10 +702,13 @@ export {
   decorateSections,
   decorateTemplateAndTheme,
   fetchPlaceholders,
+  fetchShowroomLocationsData,
   getMetadata,
+  getAllMetadata,
   loadBlock,
   loadCSS,
   loadFooter,
+  loadGeopopup,
   loadHeader,
   loadScript,
   loadSection,
