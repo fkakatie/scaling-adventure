@@ -1,0 +1,84 @@
+.pdp h1,
+.pdp h2,
+.pdp h3 {
+  text-align: left;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.pdp h1 {
+  font-size: var(--body-font-size-xxxl);
+  letter-spacing: normal;
+  line-height: 34px;
+}
+
+.pdp h2 {
+  font-size: var(--body-font-size-xxl);
+}
+
+.pdp h3 {
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-xxs);
+  font-weight: 600;
+  letter-spacing: 0.25px;
+  text-transform: uppercase;
+}
+
+.pdp .designer,
+.pdp .brand {
+  color: var(--color-dark-silver);
+  font-size: var(--body-font-size-xxxxs);
+  line-height: 12px;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+}
+
+.pdp ul.brand {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  margin-bottom: 28px;
+  padding: 0;
+  list-style: none;
+}
+
+.pdp ul.brand > li + li::before {
+  content: '';
+  display: inline-block;
+  margin: 0 10px;
+  width: 1px;
+  height: 1em;
+  background-color: var(--color-platinum);
+}
+
+.pdp ul.brand > li a:any-link {
+  color: inherit;
+}
+
+.pdp .price {
+  margin-bottom: 0;
+  font-family: var(--heading-font-family);
+  font-size: 34px;
+  line-height: 38px;
+}
+
+.pdp .sku {
+  margin-top: 0;
+  font-size: var(--body-font-size-xxs);
+  font-weight: 600;
+  line-height: 22px;
+}
+
+.pdp .technical-resources a::before {
+  content: '\e936';
+  display: block;
+  font-family: var(--icons-font-family);
+  font-size: var(--body-font-size-xl);
+}
+
+.pdp .section + .section.gallery-container {
+  padding-top: 0;
+}
