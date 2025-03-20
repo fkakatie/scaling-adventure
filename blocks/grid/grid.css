@@ -1,0 +1,16 @@
+.grid > div {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+  margin: 20px 0;
+}
+
+.grid > div > div {
+  font-size: var(--body-font-size-xxs);
+  letter-spacing: 0.25px;
+  text-align: center;
+}
+
+.grid a:any-link {
+  color: inherit;
+}
