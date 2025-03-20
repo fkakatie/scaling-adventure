@@ -234,10 +234,10 @@ main .section.bottom-border::after {
 }
 
 .skip-link:focus {
-  background-color: #f0f0f0;
-  box-shadow: 0 0 3px 1px #c8c8c8;
+  background-color: var(--color-cultured);
+  box-shadow: 0 0 3px 1px var(--color-chinese-silver);
   clip: auto;
-  color: #454545;
+  color: var(--color-outer-space);
   font-size: var(--body-font-size-xxs);
   height: auto;
   left: 2px;
@@ -405,8 +405,8 @@ a.button.button-primary,
 button.button.button-primary {
   text-decoration-line: none;
   text-decoration-style: solid;
-  border: solid 1px #333;
-  background-color: #fff;
+  border: solid 1px var(--color-dark-charcoal);
+  background-color: var(--color-white);
   font-weight: 800;
   line-height: 20px;
   height: 45px;
@@ -556,7 +556,7 @@ input[type='radio'] {
   margin-right: 13%;
   margin-left: 13%;
   text-align: center;
-  color: #454545;
+  color: var(--color-outer-space);
   word-wrap: break-word;
 }
 
@@ -575,31 +575,31 @@ input[type='radio'] {
 }
 
 .our-collection h2 {
-  font-family: goudy-old-style, serif;
+  font-family: var(--heading-font-family);
   font-weight: 400;
-  font-size: 2.6rem;
+  font-size: var(--body-font-size-xxl);
   line-height: normal;
   letter-spacing: 0;
-  color: #454545;
+  color: var(--color-outer-space);
 }
 
 .our-collection h3 {
   font-style: normal;
   font-weight: 300;
   text-align: center;
-  font-size: 24px;
+  font-size: var(--body-font-size-xl);
   line-height: 28px;
   letter-spacing: 1.2px;
   margin-bottom: 50px;
 }
 
 .error h1 {
-  font-family: goudy-old-style, serif;
+  font-family: var(--heading-font-family);
   font-weight: 400;
-  font-size: 3.6rem;
+  font-size: var(--heading-font-size-l);
   line-height: 3.8rem;
   letter-spacing: 0;
-  color: #454545;
+  color: var(--color-outer-space);
   text-align: left;
 }
 
@@ -607,15 +607,136 @@ input[type='radio'] {
   font-weight: 700;
   margin-bottom: 5px;
   margin-top: 0;
-  color: #454545;
-  font-family: proxima-nova, sans-serif;
+  color: var(--color-outer-space);
+  font-family: var(--body-font-family);
   font-style: normal;
-  font-size: 1.4rem;
+  font-size: var(--body-font-size-xxs);
   text-align: left;
 }
 
 @media (width >= 1024px), print {
   .page-wrapper {
-    border-top: 4px solid #e3e3e3
+    border-top: 4px solid var(--color-platinum);
   }
+}
+
+/* shared carousel functionality */
+.carousel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel > ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  overflow: scroll clip;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+}
+
+.carousel > ul::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel ul > li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  scroll-snap-align: start;
+  position: relative;
+}
+
+.carousel > ul > li picture {
+  position: absolute;
+  inset: 0;
+}
+
+.carousel > ul > li picture > img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.carousel nav button {
+  appearance: none;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+}
+
+.carousel nav button.nav-arrow {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  outline: 2px solid transparent;
+  color: var(--color-gray);
+  font-family: var(--icons-font-family);
+  overflow: hidden;
+}
+
+.carousel nav button.nav-arrow:disabled {
+  display: none;
+}
+
+.carousel nav button.nav-arrow:first-of-type {
+  left: 2px;
+}
+
+.carousel nav button.nav-arrow:last-of-type {
+  right: 2px;
+}
+
+.carousel nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel nav ul > li {
+  line-height: 0;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.carousel nav ul > li button {
+  position: relative;
+  height: 44px;
+  width: 16px;
+  color: var(--color-outer-space);
+  transition: color 0.3s;
+}
+
+.carousel nav ul > li button[aria-selected="true"] {
+  color: var(--color-white);
+}
+
+.carousel nav ul > li button::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background-color: currentcolor;
+  transition: width 0.3s, height 0.3s;
+}
+
+.carousel nav ul > li button[aria-selected="true"]::before,
+.carousel nav ul > li button:hover::before,
+.carousel nav ul > li button:focus::before {
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--color-gray);
 }
