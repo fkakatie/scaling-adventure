@@ -182,3 +182,90 @@ export function setCookie(key, value) {
     new Date().getTime() + minutesToTimeout * 60000,
   ).toUTCString()}; path=/`;
 }
+
+/**
+ * Initializes and builds a scrollable carousel with navigation controls.
+ * @param {HTMLElement} container - Container element that wraps the carousel `<ul>`.
+ * @param {number} [visibleSlides=1] - Number of slides visible at a time.
+ * @param {boolean} [pagination=true] - Whether to display pagination indicators.
+ * @returns {HTMLElement} Carousel container.
+ */
+export function buildCarousel(container, visibleSlides = 1, pagination = true) {
+  const carousel = container.querySelector('ul');
+  if (!carousel) return null;
+  const slides = [...carousel.children];
+  if (!slides || slides.length <= 0) return null;
+  container.classList.add('carousel');
+
+  // build navigation
+  const navEl = document.createElement('nav');
+  navEl.setAttribute('aria-label', 'Carousel navigation');
+  container.append(navEl);
+
+  // build arrows
+  ['Previous', 'Next'].forEach((label, i) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.setAttribute('aria-label', `${label} frame`);
+    button.className = `nav-arrow nav-arrow-${label.toLowerCase()}`;
+    button.innerHTML = label === 'Previous' ? '&#xE959;' : '&#xe958;';
+    button.addEventListener('click', () => {
+      const slideWidth = carousel.scrollWidth / slides.length;
+      carousel.scrollBy({
+        left: !i ? -slideWidth * visibleSlides : slideWidth * visibleSlides,
+        behavior: 'smooth',
+      });
+    });
+    navEl.append(button);
+  });
+
+  if (pagination) {
+    // build indices
+    const indicesEl = document.createElement('ul');
+    navEl.append(indicesEl);
+    slides.forEach((s, i) => {
+      const index = document.createElement('li');
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      button.setAttribute('aria-selected', !i);
+      button.addEventListener('click', () => {
+        indicesEl.querySelectorAll('button').forEach((b) => {
+          b.setAttribute('aria-selected', b === button);
+        });
+        carousel.scrollTo({
+          left: i * (carousel.clientWidth / visibleSlides),
+          behavior: 'smooth',
+        });
+      });
+      index.append(button);
+      indicesEl.append(index);
+    });
+
+    carousel.addEventListener('scroll', () => {
+      const { scrollLeft, clientWidth } = carousel;
+      const current = Math.round(scrollLeft / (clientWidth * visibleSlides));
+      [...indicesEl.querySelectorAll('button')].forEach((btn, i) => {
+        btn.setAttribute('aria-selected', i === current);
+      });
+    });
+  }
+
+  // enable scroll
+  carousel.addEventListener('scroll', () => {
+    const { scrollLeft } = carousel;
+    const slideWidth = carousel.scrollWidth / slides.length;
+    const prev = container.querySelector('.nav-arrow-previous');
+    const next = container.querySelector('.nav-arrow-next');
+    [prev, next].forEach((b) => {
+      b.disabled = false;
+    });
+    const current = Math.round(scrollLeft / slideWidth);
+    if (current < 1) prev.disabled = true;
+    else if (current >= (slides.length - visibleSlides)) next.disabled = true;
+  });
+
+  // if only one frame, hide navigation
+  if (slides.length <= visibleSlides) navEl.style.visibility = 'hidden';
+  return container;
+}
