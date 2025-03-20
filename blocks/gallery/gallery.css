@@ -1,1 +1,34 @@
-/* stylelint-disable-next-line no-empty-source */
+.gallery.carousel {
+  background-color: var(--primary-hover-background);
+}
+
+.gallery.carousel ul.frame-wrapper > li {
+  flex: 0 0 100%;
+  width: 100%;
+  height: calc(100vw - (2 * 15px));
+}
+
+.gallery.carousel nav button.nav-arrow {
+  width: 0;
+  outline: 2px solid transparent;
+  font-size: var(--heading-font-size-m);
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity 0.3s, width 0.3s;
+}
+
+.gallery.carousel:hover nav button.nav-arrow {
+  outline-color: var(--primary-hover-background);
+  opacity: 0.3;
+  width: var(--heading-font-size-xxl);
+  pointer-events: auto;
+  z-index: unset;
+}
+
+.gallery.carousel nav button.nav-arrow:hover,
+.gallery.carousel nav button.nav-arrow:focus {
+  opacity: 0.5;
+  pointer-events: auto;
+}
