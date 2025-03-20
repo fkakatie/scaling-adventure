@@ -28,6 +28,10 @@ import { getCountries } from './configs.js';
 // import { pageContextPush } from './datalayer.js';
 // import { pageTypePushGtm } from './datalayer-vcgtm.js';
 // import { addMagentoCacheListener } from './storage/util.js';
+// eslint-disable-next-line import/no-cycle
+import {
+  populatePDP,
+} from './pages/pdp/pdp.js';
 
 // const pageType = 'CMS';
 
@@ -47,8 +51,8 @@ import { getCountries } from './configs.js';
  */
 async function loadFonts() {
   await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
-  // await loadCSS('https://use.typekit.net/gyy3evs.css');
   try {
+    loadCSS('https://use.typekit.net/gyy3evs.css');
     if (!window.location.hostname.includes('localhost')) sessionStorage.setItem('fonts-loaded', 'true');
   } catch (e) {
     // do nothing
@@ -141,6 +145,46 @@ function buildBreadcrumb(main) {
   }
 }
 
+// EXTEND FOR OTHER PAGE TYPES
+function getPageType() {
+  const sku = getMetadata('sku');
+  return sku ? 'pdp' : null;
+}
+
+/**
+ * Creates accordion block from data-accordion sections
+ * @param {HTMLElement} main - Main container
+ */
+function createAccordionBlock(main) {
+  const accordions = main.querySelectorAll('.section[data-accordion]');
+  if (!accordions.length) return;
+
+  const firstSection = accordions[0];
+  const accordionContent = [];
+
+  // add each section's content to accordions array
+  accordions.forEach((accordion) => {
+    const title = accordion.dataset.accordion;
+    const content = document.createElement('div');
+    content.append(...accordion.children);
+    accordionContent.push([title, content, accordion.dataset.fullaccordion || title]);
+    accordion.removeAttribute('data-accordion');
+    if (accordion.dataset.fullAccordion) accordion.removeAttribute('data-full-accordion');
+  });
+
+  // create the accordions block and append to the first section
+  const wrapper = document.createElement('div');
+  const block = buildBlock('accordion', accordionContent);
+  wrapper.append(block);
+  firstSection.appendChild(wrapper);
+  decorateBlock(block);
+
+  // remove all other sections if empty
+  accordions.forEach((accordion) => {
+    if (!accordion.children.length) accordion.remove();
+  });
+}
+
 /**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
@@ -149,6 +193,10 @@ function buildBreadcrumb(main) {
 function buildAutoBlocks(main) {
   try {
     buildBreadcrumb(document.querySelector('header'));
+    const type = getPageType();
+    if (type === 'pdp') {
+      populatePDP(main, window.product);
+    }
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
@@ -236,6 +284,7 @@ export function decorateMain(main, fragment = false) {
   if (!fragment) buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
+  createAccordionBlock(main);
   decorateButtons(main);
 }
 
@@ -249,16 +298,11 @@ export function decorateMain(main, fragment = false) {
 //   document.head.appendChild(link);
 // }
 
-// EXTEND FOR OTHER PAGE TYPES
-function getPageType() {
-  const sku = getMetadata('sku');
-  return sku ? 'pdp' : null;
-}
-
 async function setupPageType(main) {
   const type = getPageType();
   const configured = ['pdp'];
   if (type && configured.includes(type)) {
+    main.classList.add(type);
     const module = await import(`${window.hlx.codeBasePath}/scripts/pages/${type}/${type}.js`);
     if (module.default) module.default(main);
   }
@@ -296,6 +340,7 @@ async function loadEager(doc) {
     skipLink.classList.add('skip-link');
     skipLink.textContent = 'Skip to Content';
     doc.body.prepend(skipLink);
+
     doc.body.classList.add('appear');
     const sections = main.querySelectorAll('.section');
     let lcpCandidate;
@@ -332,6 +377,9 @@ async function loadLazy(doc) {
   await loadSections(main);
 
   // await initializeDropins();
+
+  // hydrate page
+  // hydratePDP(main, window.product);
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;

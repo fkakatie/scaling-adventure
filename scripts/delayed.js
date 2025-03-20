@@ -1,7 +1,5 @@
-/* eslint-disable camelcase */
 /* eslint-disable import/no-cycle */
-// eslint-disable-next-line no-unused-vars
-import { sampleRUM, loadScript } from './aem.js';
+import { loadScript } from './aem.js';
 import { getConfigValue } from './configs.js';
 import { setAttributes } from './utils.js';
 import { getConsent } from './scripts.js';
