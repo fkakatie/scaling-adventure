@@ -1,0 +1,210 @@
+.options-form form .options-form-field {
+  display: grid;
+  gap: 5px;
+}
+
+.options-form form .options-form-field + .options-form-field {
+  margin-top: 20px;
+}
+
+.options-form form label {
+  font-weight: 600;
+  font-size: var(--body-font-size-xs);
+  letter-spacing: 0.25px;
+  line-height: 1.8rem;
+  text-transform: capitalize;
+}
+
+.options-form form label[data-required]::after {
+  content: '*';
+  margin-left: 0.5ch;
+  color: var(--color-persian-red);
+  font-size: var(--body-font-size-xxxs);
+}
+
+.options-form .carousel > ul {
+  gap: 6px;
+  margin: 0 24px;
+}
+
+.options-form .carousel > ul > li {
+  flex: 0 0 73px;
+  width: 73px;
+  height: 73px;
+}
+
+.options-form .carousel > ul > li > button {
+  width: 100%;
+  height: calc((100vw - (2 * 15px)) / 3);
+  margin: 0;
+  border: 0;
+  background-color: var(--primary-hover-background);
+}
+
+.options-form .carousel > ul > li > button picture {
+  padding: 8px;
+}
+
+.options-form .carousel nav button.nav-arrow {
+  width: 22px;
+  background-color: var(--background-color);
+  color: var(--color-outer-space);
+  font-size: var(--body-font-size-xxxs);
+  transition: opacity 0.3s, color 0.3s;
+}
+
+.options-form .carousel nav button.nav-arrow:disabled {
+  display: unset;
+  color: var(--color-dark-silver);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.options-form form .select-wrapper {
+  position: relative;
+}
+
+.options-form form .select-wrapper::after {
+  content: '\e95B';
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  border-left: 1px solid var(--color-platinum);
+  padding-left: 16px;
+  font-family: var(--icons-font-family);
+  font-size: var(--body-font-size-xxxs);
+  pointer-events: none;
+}
+
+.options-form form [data-disabled] + .select-wrapper::after {
+  content: '';
+}
+
+.options-form form input,
+.options-form form select {
+  appearance: none;
+  position: relative;
+  border: 1px solid var(--color-platinum);
+  padding: 10px 15px;
+  font: inherit;
+  font-size: var(--body-font-size-xxs);
+  overflow: hidden;
+}
+
+.options-form form input[type="number"]::-webkit-inner-spin-button,
+.options-form form input[type="number"]::-webkit-outer-spin-button {
+  margin: 0;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-appearance: none;
+}
+
+.options-form form input[type="number"] {
+  text-align: center;
+  transition: border-color 0.3s;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -moz-appearance: textfield;
+}
+
+.options-form form select {
+  width: 100%;
+  padding-right: 44px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.options-form form select:disabled {
+  background-color: var(--primary-hover-background);
+  pointer-events: none;
+}
+
+.options-form form input:hover,
+.options-form form input:focus,
+.options-form form select:not(:disabled):hover,
+.options-form form select:not(:disabled):focus {
+  outline: none;
+  border-color: currentcolor;
+}
+
+.options-form form select:not(:disabled):hover,
+.options-form form select:not(:disabled):focus {
+  box-shadow: 0 2px 4px 0 rgba(0 0 0 / 18%);
+}
+
+.options-form form p {
+  font-size: var(--body-font-size-xxs);
+  letter-spacing: 0.5px;
+}
+
+.options-form form p[aria-hidden='true'] {
+  display: none;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.options-form form p button {
+  appearance: none;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.options-form form p button:hover,
+.options-form form p button:focus {
+  text-decoration: none;
+}
+
+.options-form form .options-form-cart {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 9px;
+}
+
+.options-form form .options-form-cart label {
+  position: absolute;
+  z-index: -1;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.options-form form .options-form-cart button {
+  box-sizing: border-box;
+  display: inline-block;
+  border: 1px solid var(--color-outer-space);
+  padding: 0 40px;
+  background-color: var(--color-outer-space);
+  color: var(--color-white);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: var(--body-font-size-xxxs);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.options-form form .options-form-cart button:hover,
+.options-form form .options-form-cart button:focus {
+  border-color: var(--color-dark-silver);
+  background-color: var(--color-dark-silver);
+}
+
+.options-form form button.options-form-save {
+  padding: 0;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  background-color: transparent;
+  font-size: var(--body-font-size-xxs);
+  line-height: 2.4rem;
+}
+
+.options-form form button.options-form-save::before {
+  content: "\e938";
+  display: inline-block;
+  margin: -2px 7px 0 0;
+  font-family: var(--icons-font-family);
+  font-size: var(--body-font-size-xs);
+  line-height: 16px;
+  vertical-align: middle;
+}
